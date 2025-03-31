@@ -1,10 +1,10 @@
-import { RootState } from "@/app/store";
+import { RootState, AppDispatch } from "@/app/store";
 import { fetchUser, setUser } from "@/app/userSlice";
 import { Button } from "@/components/ui/button";
 import { useSelector, useDispatch } from "react-redux";
 const ComponentOne = () => {
   const user = useSelector((state: RootState) => state.user);
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const setMaryAsync = () => {
     dispatch(fetchUser({ name: "Mary", email: "mary@gmail.com" }));
   };
@@ -161,8 +161,9 @@ export type AppDispatch = typeof store.dispatch;
             <h3>Update state using dispatch from react-redux</h3>
             <code>
               <pre>
-                {`const dispatch = useDispatch();
-dispatch(setUser({ name: "John", email: "john@gmail.com" }));`}
+                {`const dispatch = useDispatch<AppDispatch>();;
+dispatch(setUser({ name: "John", email: "john@gmail.com" }));
+dispatch(fetchUser({ name: "Mary", email: "mary@gmail.com" }));`}
               </pre>
             </code>
           </li>
