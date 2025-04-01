@@ -1,75 +1,30 @@
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { AppSidebar } from "@/components/app-sidebar";
+import { Outlet } from "react-router";
 import { Button } from "@/components/ui/button";
-import {
-  Cherry,
-  Menu,
-  FileCheck,
-  Home,
-  BetweenHorizontalEnd,
-  Webhook
-} from "lucide-react";
-import { useState } from "react";
-import { Link, Outlet } from "react-router";
+import { Search } from "lucide-react";
 
-const IndexLayout = () => {
-  const [navigations] = useState([
-    { name: "Home", path: "/", icon: <Home size={18} /> },
-    {
-      name: "React Hook Form Zod",
-      path: "/react-hook-form-zod",
-      icon: <FileCheck size={18} />
-    },
-    {
-      name: "Redux Toolkit",
-      path: "/redux-toolkit",
-      icon: <BetweenHorizontalEnd size={18} />
-    },
-    {
-      name: "Axios Instance",
-      path: "/axios-instance",
-      icon: <Webhook size={18} />
-    }
-  ]);
-
+export default function IndexLayout() {
   return (
-    <div className="lg:grid grid-cols-6 gap-2 pr-2">
-      <aside className="hidden lg:block min-h-screen shadow bg-secondary/50">
-        <h1 className="p-2 text-xl font-black">React Docs</h1>
-        <ul className="py-4 space-y-2">
-          {navigations.map(({ name, path, icon }) => (
-            <li
-              key={name}
-              className="border-b flex gap-2 items-center p-2 text-slate-800 hover:text-primary transition-all duration-300"
+    <SidebarProvider>
+      <AppSidebar />
+      <main className="w-full p-1 overflow-hidden bg-white dark:bg-slate-700">
+        <nav className="flex justify-between w-full items-center p-2">
+          <div className="flex items-center gap-2 w-fit">
+            <SidebarTrigger className="cursor-pointer" />
+          </div>
+          <div className="flex gap-2 items-center">
+            <Button
+              size={"icon"}
+              variant="secondary"
+              className="rounded-full p-5 "
             >
-              {icon}
-              <Link
-                className="text-slate-800 hover:text-primary transition-all duration-300"
-                to={path}
-              >
-                {name}
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </aside>
-      <div className="col-span-5">
-        <nav className="p-1 flex justify-between shadow my-4 rounded bg-secondary/50">
-          <Button
-            variant="secondary"
-            size="icon"
-            className="cursor-pointer lg:hidden"
-          >
-            <Menu size={32} />
-          </Button>
-          <Button variant="secondary" size="icon">
-            <Cherry size={32} />
-          </Button>
+              <Search />
+            </Button>
+          </div>
         </nav>
-        <main>
-          <Outlet />
-        </main>
-      </div>
-    </div>
+        <Outlet />
+      </main>
+    </SidebarProvider>
   );
-};
-
-export default IndexLayout;
+}

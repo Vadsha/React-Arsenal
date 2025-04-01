@@ -124,8 +124,19 @@
     @apply bg-black/90 w-full block relative my-2 text-white p-2 rounded-lg;
   }
 
-  a {
+  p a {
     @apply text-blue-500 hover:underline;
+  }
+
+  .sidebar-items {
+    /* background-color: var(--secondary); */
+    @apply bg-secondary dark:bg-slate-700;
+  }
+
+  a.active {
+    /* background-color: var(--primary);
+    color: white; */
+    @apply bg-primary text-white dark:bg-primary dark:text-white;
   }
 }
 
